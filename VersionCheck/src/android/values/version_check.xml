@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="soft_update_title">升级</string>
+  <string name="soft_update_info">当前有新版本，是否升级？</string>
+  <string name="soft_update_updatebtn">升级</string>
+  <string name="soft_update_later">下次</string>
+  <string name="soft_updating">正在升级</string>
+  <string name="soft_update_cancel">取消</string>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin 
+    xmlns="http://www.phonegap.com/ns/plugins/1.0" id="com.txw.versioncheck" version="1.0.1">
+    <name>Version Check</name>
+    <engines>
+        <engine name="cordova" version=">=3.4.0"/>
+    </engines>
+    <asset src="www/version-check.js" target="js/version-check.js"/>
+    <js-module src="www/version-check.js" name="VerionCheck">
+        <clobbers target="verionCheck" />
+    </js-module>
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="VersionCheck">
+                <param name="android-package" value="com.txw.plugin.VersionCheck"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <!-- Required  一些系统要求的权限，如访问网络等-->
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <provider android:authorities="${applicationId}.application.provider" android:exported="false" android:grantUriPermissions="true" android:name="com.txw.plugin.FileProvider">
+                <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/txw_paths" />
+            </provider>
+        </config-file>
+        <source-file src="src/android/VersionCheck.java" target-dir="src/com/txw/plugin/"/>
+        <source-file src="src/android/UpdateManager.java" target-dir="src/com/txw/plugin/"/>
+        <source-file src="src/android/ParseXmlService.java" target-dir="src/com/txw/plugin/"/>
+        <source-file src="src/android/layout/softupdate_progress.xml" target-dir="res/layout" />
+        <source-file src="src/android/values/version_check.xml" target-dir="res/values" />
+        <source-file src="src/android/xml/txw_paths.xml" target-dir="res/xml" />
+    </platform>
+    <!--<platform name="ios"><config-file target="config.xml" parent="/widget"><feature name="Hello"><param name="ios-package" value="HWPHello" /></feature></config-file><header-file src="src/ios/HWPHello.h" target-dir="HelloPlugin"/><source-file src="src/ios/HWPHello.m" target-dir="HelloPlugin"/></platform><platform name="wp7"><source-file src="src/wp7/Hello.cs"/></platform>-->
+</plugin>
